@@ -4,7 +4,7 @@ namespace TDD;
 
 class Mazo {
 
-  protected $cartas = range(1,48);
+  protected $cartas;
 
   public function mezclar() {
     return TRUE;
