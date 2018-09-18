@@ -16,7 +16,8 @@ class MazoTest extends TestCase {
 
     public function testMezclable() {
         $mazo = new Mazo;
-        $this->assertTrue($mazo->mezclar());
+        $mazoMezclado = $mazo->mezclar();  //Genero dos mazos, uno mezclado y otro sin
+        $this->assertNotEqual($mazoMezclado, $mazo); //Mezclo y testeo que sean distintos
     }
 
 
