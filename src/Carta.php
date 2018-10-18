@@ -11,4 +11,13 @@ class Carta {
     $this->palo = $palo;
     $this->numero = $numero;    
   }
+
+  public function obtenerPalo(){
+    return $this->palo;
+  }
+
+  public function obtenerNumero(){
+    return $this->numero;
+  }
+
 }
