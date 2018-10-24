@@ -10,6 +10,7 @@ class CartaTest extends TestCase {
 
     $cartaEsp = new CartaEspanola("Espada",10);
     $cartaPoker = new CartaPoker("Diamantes", 7);
+    
     $this->assertTrue(isset($cartaEsp));
     $this->assertTrue(isset($cartaPoker));
 
