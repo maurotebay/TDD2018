@@ -7,21 +7,31 @@ use PHPUnit\Framework\TestCase;
 class CartaTest extends TestCase {
 
   public function testExiste(){
-    $carta = new Carta("Espada","10");
-    $this->assertTrue(isset($carta));
+
+    $cartaEsp = new CartaEspanola("Espada",10);
+    $cartaPoker = new CartaPoker("Diamantes", 7);
+    $this->assertTrue(isset($cartaEsp));
+    $this->assertTrue(isset($cartaPoker));
+
   }
 
   public function testVerPalo() {
 
-    $carta = new Carta("Espada", "10");
+    $cartaEsp = new CartaEspanola("Espada", 10);
+    $this->assertEquals($cartaEsp->obtenerPalo(), "Espada");
 
-    $this->assertEquals($carta->obtenerPalo(), "Espada");
+    $cartaPoker = new CartaPoker("Diamantes", 7);
+    $this->assertEquals($cartaPoker->obtenerPalo(), "Diamantes");
   }
 
   public function testVerNumero() {
-    $carta = new Carta("Espada", "10");
 
-    $this->assertEquals($carta->obtenerNumero(),"10");
+    $cartaEsp = new CartaEspanola("Espada", 10);
+    $this->assertEquals($cartaEsp->obtenerNumero(), 10);
+  
+    $cartaPoker = new CartaPoker("Diamantes", 7);
+    $this->assertEquals($cartaPoker->obtenerNumero(),7);
+
   }
 
 }

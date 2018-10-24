@@ -2,6 +2,6 @@
 
 namespace TDD;
 
-class CartaPoker extends Carta{
+class CartaPoker implements CartaInterface{
 
 }

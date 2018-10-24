@@ -2,6 +2,6 @@
 
 namespace TDD;
 
-class CartaEspanola extends Carta{
+class CartaEspanola implements CartaInterface{
     
 }
