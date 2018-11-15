@@ -15,24 +15,35 @@ class Mazo {
   }
 
   public function mezclar() {
-    $this->cartas= shuffle($this->cartas);
+
+    $this->cartas= shuffle($this->cartas);    //Mezclo los elementos del array
+
     return TRUE;
   }
 
   public function cortar($lugar) {
-    if($this->tipo=="Poker" && $lugar<52){
-      $lugarPermitido=TRUE;
+
+    $lugar--;   //le resto uno al lugar ya que el array arranca en 0 y no en 1
+
+    if($lugar < count($this->cartas)){    //Si quiero cortar el mazo en una posicion menor a la cantidad de elementos
+
+      $lugarPermitido = TRUE;         //Entonces el lugar para cortar esta permitido
     }
-    elseif($this->tipo=="Espanol" && $lugar<48){
-      $lugarPermitido=TRUE;
-    }
+    
     else{
-      $lugarPermitido= FALSE;
+
+      $lugarPermitido= FALSE;         //En cualquier otro caso, no se permite
     }
-    if($lugarPermitido){
-      $arriba= array_slice($this->cartas, 0, $lugar-1);
-      $this->cartas=array_slice($this->cartas, $lugar);
-      $this->cartas=array_merge($arriba, $this->cartas);
+    
+    $lugar--;   //le resto uno al lugar ya que el array arranca en 0 y no en 1
+
+    if($lugarPermitido){      //Si el lugar esta permitido
+    
+      $arriba = array_slice($this->cartas, 0, $lugar);   //Guardo en una variable auxiliar la primera parte cortada
+    
+      $abajo = array_slice($this->cartas, $lugar+1, count($this->cartas) );   //Guardo en cartas el array cortado desde el lugar hasta el final
+
+      $this->cartas=array_merge($abajo, $arriba);
     }
     
     return $lugarPermitido;
@@ -59,14 +70,20 @@ class Mazo {
 
   public function esVacio(){
 
-    if($this->contarCartas()==0){
-      return TRUE;
+    if($this->contarCartas()==0){   //Si la cantidad de cartas es 0
+
+      return TRUE;                  //El mazo esta vacio
     }
 
     else{
-      return FALSE;
+    
+      return FALSE;                 //En otro caso, no lo esta
     }
 
   }
 
+  public function obtenerCarta(){
+    $carta = array_pop($this->cartas); //Devuelve y quita del array de cartas el ultimo elemento del array
+    return $carta;  //Devolvemos el elemento del array
+  }
 }
