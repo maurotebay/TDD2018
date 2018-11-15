@@ -10,21 +10,21 @@ class MazoTest extends TestCase {
      * Valida que se puedan crear mazos de cartas.
      */
     public function testExiste() {
-        $mazo = new Mazo;
+        $mazo = new Mazo("Espanol", [1,2,3,4,5]);
         $this->assertTrue(isset($mazo));
     }
 
     public function testMezclable() {
-        $mazo = new Mazo;
+        $mazo = new Mazo("Espanol", [1,2,3,4,5]);
         $mazoMezclado = $mazo->mezclar();  //Genero dos mazos, uno mezclado y otro sin
         $this->assertNotEquals($mazoMezclado, $mazo); //Mezclo y testeo que sean distintos
     }
 
     public function testCortable() {
-      $mazoNormal = new Mazo;
-      $mazoCortado = $mazoNormal;
+      $mazoNormal = new Mazo("Espanol", [1,2,3,4,5]);
+      $mazoCortado = new Mazo("Espanol", [1,2,3,4,5]);
 
-      $mazoCortado->cortar(); //Genero dos mazos iguales, corto uno y compruebo que sean distintos
+      $mazoCortado->cortar(2); //Genero dos mazos iguales, corto uno y compruebo que sean distintos
 
       $this->assertNotEquals($mazoNormal,$mazoCortado);
     }
@@ -32,7 +32,7 @@ class MazoTest extends TestCase {
     public function testContarCartas() {
 
       $mazo = new Mazo;
-      $carta = new Carta("Espada", "10");
+      $carta = new CartaEspanola("Espada", "10");
 
       $mazo->agregarCarta($carta);
 
@@ -49,7 +49,7 @@ class MazoTest extends TestCase {
     public function testAgregarCarta() {
 
       $mazo = new Mazo;
-      $carta = new Carta("Espada", "10");
+      $carta = new CartaEspanola("Espada", "10");
       
       $this->assertTrue($mazo->agregarCarta($carta));
 
@@ -57,7 +57,7 @@ class MazoTest extends TestCase {
 
     public function testObtenerCarta() {
       $mazo = new Mazo;
-      $carta = new Carta("Espada", "10");
+      $carta = new CartaEspanola("Espada", "10");
 
       $mazo->agregarCarta($carta); //Genero un mazo vacío y una carta, la meto en el mazo y luego la obtengo.
                                    //Compruebo que las cartas sean iguales
