@@ -31,11 +31,11 @@ class MazoTest extends TestCase {
 
     public function testContarCartas() {
 
-      $mazo = new Mazo;
-      $carta = new CartaEspanola("Espada", "10");
+      $mazo = new Mazo("Poker", []);
+      $carta = new CartaPoker("Picas", "10");
 
       $mazo->agregarCarta($carta);
-
+      echo get_class($carta);
       $this->assertEquals($mazo->contarCartas(),1);
     }
 

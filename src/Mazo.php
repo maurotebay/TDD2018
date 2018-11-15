@@ -39,4 +39,20 @@ class Mazo {
   
   }
 
+  public function contarCartas(){
+    return count($this->cartas);
+  }
+
+  public function agregarCarta (CartaInterface $carta){
+    if($this->tipo == "Poker" && get_class($carta) == "TDD\CartaPoker"){
+      array_push($this->cartas, $carta);
+    }
+    elseif($this->tipo == "Espanol" && get_class($carta) == "TDD\CartaEspanola"){
+      array_push($this->cartas, $carta);
+    }
+    else
+      return FALSE;
+    
+  }
+
 }
