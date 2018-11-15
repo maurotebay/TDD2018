@@ -46,13 +46,27 @@ class Mazo {
   public function agregarCarta (CartaInterface $carta){
     if($this->tipo == "Poker" && get_class($carta) == "TDD\CartaPoker"){
       array_push($this->cartas, $carta);
+      return TRUE;
     }
     elseif($this->tipo == "Espanol" && get_class($carta) == "TDD\CartaEspanola"){
       array_push($this->cartas, $carta);
+      return TRUE;
     }
     else
       return FALSE;
     
+  }
+
+  public function esVacio(){
+
+    if($this->contarCartas()==0){
+      return TRUE;
+    }
+
+    else{
+      return FALSE;
+    }
+
   }
 
 }

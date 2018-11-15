@@ -40,15 +40,17 @@ class MazoTest extends TestCase {
     }
 
     public function testEsVacio() {
-      $mazo = new Mazo;
+      $mazoLleno = new Mazo("Poker", [1,2,3,7]); //Creamos 2 mazos, uno vacio y otro con cartas
+      $mazoVacio = new Mazo("Espanol", []);
       
-      $this->assertTrue($mazo->contarCartas(),0);
+      $this->assertTrue($mazoVacio->esVacio());  //Comprobamos que se emite True o False dependiendo de si tiene o no cartas
+      $this->assertFalse($mazoLleno->esVacio());
 
     }
 
     public function testAgregarCarta() {
 
-      $mazo = new Mazo;
+      $mazo = new Mazo("Espanol", [1,7,5,3]);
       $carta = new CartaEspanola("Espada", "10");
       
       $this->assertTrue($mazo->agregarCarta($carta));
@@ -56,7 +58,7 @@ class MazoTest extends TestCase {
     }
 
     public function testObtenerCarta() {
-      $mazo = new Mazo;
+      $mazo = new Mazo("Espanol", [1,7,5,3]);
       $carta = new CartaEspanola("Espada", "10");
 
       $mazo->agregarCarta($carta); //Genero un mazo vacío y una carta, la meto en el mazo y luego la obtengo.
