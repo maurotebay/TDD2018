@@ -29,8 +29,6 @@ class MazoTest extends TestCase {
       $mazoCortado = new Mazo("Espanol", [1,2,3,4,5]);
 
       $mazoCortado->cortar(2); //Corto uno de los dos
-      var_dump($mazoNormal);
-      var_dump($mazoCortado);
 
       $this->assertNotEquals($mazoNormal,$mazoCortado);   //Compruebo que los mazos sean diferentes
     }

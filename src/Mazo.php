@@ -23,48 +23,42 @@ class Mazo {
 
   public function cortar($lugar) {
 
-    $lugar--;   //le resto uno al lugar ya que el array arranca en 0 y no en 1
+    if(!$this->esVacio()){                      //Si el mazo no esta vacio
+      if($lugar <= $this->contarCartas()-1){    //Y lo quiero cortar en una posicion valida
 
-    if($lugar < count($this->cartas)){    //Si quiero cortar el mazo en una posicion menor a la cantidad de elementos
+        $mazo = $this->cartas;
 
-      $lugarPermitido = TRUE;         //Entonces el lugar para cortar esta permitido
+        $abajo = array_slice($mazo, 0, $lugar);    //Guardo la parte de arriba del mazo para luego ponerla abajo
+        $arriba = array_slice($mazo, $lugar);      //Guardo la parte de abajo del mazo para luego ponerla arriba
+
+        $this->cartas = array_merge($arriba, $abajo);   //Formo el nuevo mazo cortado mediante la union de las dos partes
+      }
+      else{
+        return FALSE;       //Retorno false en caso de que le pase una posicion para cortar invalida
+      }
     }
-    
-    else{
 
-      $lugarPermitido= FALSE;         //En cualquier otro caso, no se permite
-    }
-    
-    $lugar--;   //le resto uno al lugar ya que el array arranca en 0 y no en 1
+    return $this->esVacio();
 
-    if($lugarPermitido){      //Si el lugar esta permitido
-    
-      $arriba = array_slice($this->cartas, 0, $lugar);   //Guardo en una variable auxiliar la primera parte cortada
-    
-      $abajo = array_slice($this->cartas, $lugar+1, count($this->cartas) );   //Guardo en cartas el array cortado desde el lugar hasta el final
-
-      $this->cartas=array_merge($abajo, $arriba);
-    }
-    
-    return $lugarPermitido;
-  
   }
 
   public function contarCartas(){
-    return count($this->cartas);
+    return count($this->cartas);    //Devuelve la cantidad de elementos del array(cantidad de cartas en el mazo)
   }
 
   public function agregarCarta (CartaInterface $carta){
-    if($this->tipo == "Poker" && get_class($carta) == "TDD\CartaPoker"){
-      array_push($this->cartas, $carta);
-      return TRUE;
+    if($this->tipo == "Poker" && get_class($carta) == "TDD\CartaPoker"){    //Si la carta es del mismo tipo que el mazo
+
+      array_push($this->cartas, $carta);    //Entonces la agrega al final del array
+      return TRUE;    //Devuelvo True si se pudo agregar la carta
     }
-    elseif($this->tipo == "Espanol" && get_class($carta) == "TDD\CartaEspanola"){
-      array_push($this->cartas, $carta);
+    elseif($this->tipo == "Espanol" && get_class($carta) == "TDD\CartaEspanola"){   //Si la carta es del mismo tipo que el mazo
+
+      array_push($this->cartas, $carta);    //La agrega al final del mazo
       return TRUE;
     }
     else
-      return FALSE;
+      return FALSE;   //Si la carta no es del mismo tipo que el mazo, devuelve FALSE y la misma no se agrega
     
   }
 
