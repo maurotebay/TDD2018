@@ -77,7 +77,7 @@ class Mazo {
   }
 
   public function obtenerCarta() {
-    $carta = array_pop($this->cartas); //Devuelve y quita del array de cartas el ultimo elemento del array
+    $carta = array_pop($this->cartas); //Quita y devuelve del array de cartas el ultimo elemento
     return $carta; //Devolvemos el elemento del array
   }
 }
