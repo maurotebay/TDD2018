@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/maurotebay/TDD2018.svg?branch=master)](https://travis-ci.org/maurotebay/TDD2018)
 
-[![Build Status](https://scrutinizer-ci.com/g/maurotebay/TDD2018/badges/build.png?b=master)](https://scrutinizer-ci.com/g/maurotebay/TDD2018/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/maurotebay/TDD2018/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/maurotebay/TDD2018/?branch=master)
 
 # Consigna
 
