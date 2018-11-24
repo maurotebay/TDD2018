@@ -2,7 +2,7 @@
 
 namespace TDD;
 
-Interface CartaInterface{
+Interface CartaInterface {
 
   //Funcion que devuelve el palo de la carta
   public function obtenerPalo();
