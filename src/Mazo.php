@@ -24,7 +24,7 @@ class Mazo {
   public function cortar($lugar) {
 
     if(!$this->esVacio()){                      //Si el mazo no esta vacio
-      if($lugar <= $this->contarCartas()-1){    //Y lo quiero cortar en una posicion valida
+      if($lugar <= $this->contarCartas()){    //Y lo quiero cortar en una posicion valida
 
         $mazo = $this->cartas;
 
@@ -38,7 +38,7 @@ class Mazo {
       }
     }
 
-    return $this->esVacio();
+    return !$this->esVacio();     //Retorna false si esta vacio, sino devuelve true
 
   }
 

@@ -17,20 +17,44 @@ class MazoTest extends TestCase {
     }
 
     public function testMezclable() {
-        $mazo = new Mazo("Espanol", [1,2,3,4,5]);
+        $mazoEsp = new Mazo("Espanol", [1,2,3,4,5]);
 
-        $mazoMezclado = $mazo->mezclar();  //Genero dos mazos, uno mezclado y otro sin mezclar
+        $mazoEspMezclado = $mazoEsp->mezclar();  //Genero dos mazos, uno mezclado y otro sin mezclar
         
-        $this->assertNotEquals($mazoMezclado, $mazo); //Mezclo y testeo que sean distintos
+        $this->assertNotEquals($mazoEspMezclado, $mazoEsp); //Mezclo y testeo que sean distintos
+
+        $mazoPok = new Mazo("Poker", [1,2,3,4,5]);
+
+        $mazoPokMezclado = $mazoPok->mezclar();  //Genero dos mazos, uno mezclado y otro sin mezclar
+        
+        $this->assertNotEquals($mazoPokMezclado, $mazoPok); //Mezclo y testeo que sean distintos
     }
 
     public function testCortable() {
-      $mazoNormal = new Mazo("Espanol", [1,2,3,4,5]);   //Creo dos mazos iguales
-      $mazoCortado = new Mazo("Espanol", [1,2,3,4,5]);
+      $mazoEspNormal = new Mazo("Espanol", [1,2,3,4,5]);   //Creo dos mazos iguales
+      $mazoEspCortado = new Mazo("Espanol", [1,2,3,4,5]);
 
-      $mazoCortado->cortar(2); //Corto uno de los dos
+      $mazoEspCortado->cortar(2); //Corto uno de los dos
 
-      $this->assertNotEquals($mazoNormal,$mazoCortado);   //Compruebo que los mazos sean diferentes
+      $this->assertNotEquals($mazoEspNormal,$mazoEspCortado);   //Compruebo que los mazos sean diferentes
+
+      $mazoPokNormal = new Mazo("Poker", [1,2,3,4,5]);   //Creo dos mazos iguales
+      $mazoPokCortado = new Mazo("Poker", [1,2,3,4,5]);
+
+      $mazoPokCortado->cortar(2); //Corto uno de los dos
+
+      $this->assertNotEquals($mazoPokNormal,$mazoPokCortado);   //Compruebo que los mazos sean diferentes
+    }
+
+    public function testNoCortable(){
+      $mazoVacio = new Mazo("Poker", []);
+
+      $this->assertFalse($mazoVacio->cortar(3));
+
+      $mazoTrivial = new Mazo("Espanol", [1,2,3,4,5,6]);
+
+      $this->assertFalse($mazoTrivial->cortar(7));
+      $this->assertFalse($mazoTrivial->cortar(19));
     }
 
     public function testContarCartas() {
@@ -54,19 +78,43 @@ class MazoTest extends TestCase {
 
     public function testAgregarCarta() {
 
-      $mazo = new Mazo("Espanol", [1,7,5,3]);     //Creo un mazo espanol
-      $carta = new CartaEspanola("Espada", "10"); //Creo una carta espanola
+      $mazoEsp = new Mazo("Espanol", [1,7,5,3]);     //Creo un mazo espanol
+      $cartaEsp = new CartaEspanola("Espada", "10"); //Creo cartas espanolas
+      $cartaEsp2 = new CartaEspanola("Espada", "1");
       
-      $this->assertTrue($mazo->agregarCarta($carta)); //Le agrego una carta al mazo y compruebo que se agregue
+      $mazoPok = new Mazo("Poker", [12,3,4]);     //Creo un mazo de poker
+      $cartaPok = new CartaPoker("Picas", "A");   //Creo cartas de poker
+      $cartaPok2 = new CartaPoker("Diamantes", "7");
+     
+      $this->assertTrue($mazoEsp->agregarCarta($cartaEsp)); //Le agrego una carta al mazo y compruebo que se agregue
+      $this->assertTrue($mazoEsp->agregarCarta($cartaEsp2));
 
+      $this->assertTrue($mazoPok->agregarCarta($cartaPok));
+      $this->assertTrue($mazoPok->agregarCarta($cartaPok2));
+    }
+
+    public function testAgregarCartaErronea(){
+
+      $mazoEsp = new Mazo("Espanol", [1,7,5,3]);     //Creo un mazo espanol
+      $mazoPok = new Mazo("Poker", [12,3,4]);         //Creo un mazo de poker
+      $cartaEsp = new CartaEspanola("Espada", "10"); //Creo una carta espanola
+      $cartaPok = new CartaPoker("Picas", "A");       //Creo una carta de poker
+     
+
+      $this->assertFalse($mazoPok->agregarCarta($cartaEsp)); //Le intento agregar una carta al mazo y compruebo que no se puede agregar
+      $this->assertFalse($mazoEsp->agregarCarta($cartaPok));  //Le intento agregar una carta al mazo y compruebo que no se puede agregar
     }
 
     public function testObtenerCarta() {
       $mazo = new Mazo("Espanol", [1,7,5,3]);     //Creo un mazo 
-      $carta = new CartaEspanola("Espada", "10"); //Creo una carta
+      $carta1 = new CartaEspanola("Espada", "10"); //Creo cartas
+      $carta2 = new CartaEspanola("Oro", "2");
 
-      $mazo->agregarCarta($carta);  //Le agrego la carta al mazo
+      $mazo->agregarCarta($carta1);  //Le agrego la carta al mazo
+      $mazo->agregarCarta($carta2);
                                    
-      $this->assertEquals($mazo->obtenerCarta(),$carta);  //Compruebo que las carta devuelta sea igual a la que le agregue
+      $this->assertEquals($mazo->obtenerCarta(),$carta2);  //Compruebo que la carta obtenida sea igual a la ultima que le agregue
+      $this->assertEquals($mazo->obtenerCarta(),$carta1);  //Compruebo que la carta obtenida sea igual a la primera que meti
+
     }
 }
